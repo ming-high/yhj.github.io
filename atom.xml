@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Yuming の Cabin</title>
+  
+  <subtitle>每天记录一点点</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://fishzone.cn/"/>
+  <updated>2017-10-18T13:18:42.000Z</updated>
+  <id>http://fishzone.cn/</id>
+  
+  <author>
+    <name>Blank Yu</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Android文件路径</title>
+    <link href="http://fishzone.cn/2017/10/17/Android%E6%96%87%E4%BB%B6%E8%B7%AF%E5%BE%84/"/>
+    <id>http://fishzone.cn/2017/10/17/Android文件路径/</id>
+    <published>2017-10-17T01:02:34.000Z</published>
+    <updated>2017-10-18T13:18:42.000Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="Android常见文件夹"><a href="#Android常见文件夹" class="headerlink" title="Android常见文件夹"></a>Android常见文件夹</h3><h4 id="外部存储、内部存储"><a href="#外部存储、内部存储" class="headerlink" title="外部存储、内部存储"></a>外部存储、内部存储</h4><h5 id="Internal-storage"><a href="#Internal-storage" class="headerlink" title="Internal storage:"></a>Internal storage:</h5><ul><li>总是可用的，文件默认被当前app访问（非root）。</li><li>当用户卸载app的时候，系统会把internal内该app相关的文件都清除干净。</li><li>存储隐私信息，比如账号信息（非root）</li></ul><h5 id="External-storage"><a href="#External-storage" class="headerlink" title="External storage:"></a>External storage:</h5><ul><li>6.0以上需要获取Storage权限。</li><li>并不总是可用的，因为用户有时会通过USB存储模式挂载外部存储器，当取下挂载的这部分    后，就无法对其进行访问了。</li><li>保存在这里的文件可以被其他程序访问。</li><li>保存用户卸载app后不需要删除或者下次安装可以继续访问的文件</li></ul><h4 id="常见的获取文件路径方法，对应的绝对路径"><a href="#常见的获取文件路径方法，对应的绝对路径" class="headerlink" title="常见的获取文件路径方法，对应的绝对路径"></a>常见的获取文件路径方法，对应的绝对路径</h4><ul><li><p>Internal storage</p><pre><code>1. getCacheDir().getAbsolutePath()：     /data/data/packagename/cache2. getFilesDir().getAbsolutePath()：  /data/data/packagename/files</code></pre></li><li><p>External storage</p><pre><code>1. getExternalCacheDir().getAbsolutePath()：   /storage/emulated/0/Android/data/packagename/cache2. Environment.getExternalStorageDirectory().getAbsolutePath()：   /storage/emulated/03.     Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).getAbsolutePath())：   /storage/emulated/0/DCIM4. getExternalFilesDir(Environment.DIRECTORY_PICTURES).getAbsolutePath：   /storage/emulated/0/Android/data/packagename/files/Pictures</code></pre></li></ul><h3 id="Java获取相对路径"><a href="#Java获取相对路径" class="headerlink" title="Java获取相对路径"></a>Java获取相对路径</h3><pre><code>String path = &quot;/var/data/x/xyz.txt&quot;;String base = &quot;/var/data&quot;;String relative = new File(base).toURI().relativize(new  File(path).toURI()).getPath();// relative == &quot;x/xyz.dat&quot;</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;Android常见文件夹&quot;&gt;&lt;a href=&quot;#Android常见文件夹&quot; class=&quot;headerlink&quot; title=&quot;Android常见文件夹&quot;&gt;&lt;/a&gt;Android常见文件夹&lt;/h3&gt;&lt;h4 id=&quot;外部存储、内部存储&quot;&gt;&lt;a href=&quot;#外部存储
+      
+    
+    </summary>
+    
+    
+      <category term="Anroid" scheme="http://fishzone.cn/tags/Anroid/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>hexo常用命令笔记</title>
+    <link href="http://fishzone.cn/2017/10/12/hexo%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E7%AC%94%E8%AE%B0/"/>
+    <id>http://fishzone.cn/2017/10/12/hexo常用命令笔记/</id>
+    <published>2017-10-12T06:48:43.000Z</published>
+    <updated>2017-10-12T11:30:17.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="hexo"><a href="#hexo" class="headerlink" title="hexo"></a>hexo</h2><pre><code>npm install hexo -g #安装  npm update hexo -g #升级  hexo init #初始化</code></pre><h2 id="简写"><a href="#简写" class="headerlink" title="简写"></a>简写</h2><pre><code>hexo n &quot;我的博客&quot; == hexo new &quot;我的博客&quot; #新建文章hexo p == hexo publishhexo g == hexo generate#生成hexo s == hexo server #启动服务预览hexo d == hexo deploy#部署</code></pre><h2 id="服务器"><a href="#服务器" class="headerlink" title="服务器"></a>服务器</h2><pre><code>hexo server #Hexo 会监视文件变动并自动更新，您无须重启服务器。hexo server -s #静态模式hexo server -p 5000 #更改端口hexo server -i 192.168.1.1 #自定义 IPhexo clean #清除缓存 网页正常情况下可以忽略此条命令hexo g #生成静态网页hexo d #开始部署</code></pre><h3 id="监视文件变动"><a href="#监视文件变动" class="headerlink" title="监视文件变动"></a>监视文件变动</h3><pre><code>hexo generate #使用 Hexo 生成静态文件快速而且简单hexo generate --watch #监视文件变动</code></pre><h3 id="完成后部署"><a href="#完成后部署" class="headerlink" title="完成后部署"></a>完成后部署</h3><pre><code>两个命令的作用是相同的hexo generate --deployhexo deploy --generatehexo deploy -ghexo server -g</code></pre><h3 id="草稿"><a href="#草稿" class="headerlink" title="草稿"></a>草稿</h3><pre><code>hexo publish [layout] &lt;title&gt;</code></pre><h3 id="模版"><a href="#模版" class="headerlink" title="模版"></a>模版</h3><pre><code>hexo new &quot;postName&quot; #新建文章hexo new page &quot;pageName&quot; #新建页面hexo generate #生成静态页面至public目录hexo server #开启预览访问端口（默认端口4000，&apos;ctrl + c&apos;关闭server）hexo deploy #将.deploy目录部署到GitHubhexo new [layout] &lt;title&gt;hexo new photo &quot;My Gallery&quot;hexo new &quot;Hello World&quot; --lang tw</code></pre><table><thead><tr><th style="text-align:center">变量</th><th style="text-align:center">描述</th></tr></thead><tbody><tr><td style="text-align:center">layout</td><td style="text-align:center">布局</td></tr><tr><td style="text-align:center">title</td><td style="text-align:center">标题</td></tr><tr><td style="text-align:center">date</td><td style="text-align:center">文件建立日期</td></tr></tbody></table><pre><code>title: 使用Hexo搭建个人博客layout: postdate: 2014-03-03 19:07:43comments: truecategories: Blogtags: [Hexo]keywords: Hexo, Blogdescription: 生命在于折腾，又把博客折腾到Hexo了。给Hexo点赞。</code></pre><h2 id="模版（Scaffold）"><a href="#模版（Scaffold）" class="headerlink" title="模版（Scaffold）"></a>模版（Scaffold）</h2><pre><code>hexo new photo &quot;My Gallery&quot;</code></pre><table><thead><tr><th style="text-align:center">变量</th><th style="text-align:center">描述</th></tr></thead><tbody><tr><td style="text-align:center">layout</td><td style="text-align:center">布局</td></tr><tr><td style="text-align:center">title</td><td style="text-align:center">标题</td></tr><tr><td style="text-align:center">date</td><td style="text-align:center">文件建立日期</td></tr></tbody></table><h2 id="设置文章摘要"><a href="#设置文章摘要" class="headerlink" title="设置文章摘要"></a>设置文章摘要</h2><pre><code>以上是文章摘要 &lt;!--more--&gt; 以下是余下全文 </code></pre><h2 id="写作"><a href="#写作" class="headerlink" title="写作"></a>写作</h2><pre><code>hexo new page &lt;title&gt;hexo new post &lt;title&gt;</code></pre><table><thead><tr><th style="text-align:center">变量</th><th style="text-align:left">描述</th></tr></thead><tbody><tr><td style="text-align:center">:title</td><td style="text-align:left">标题</td></tr><tr><td style="text-align:center">:year</td><td style="text-align:left">建立的年份（4 位数）</td></tr><tr><td style="text-align:center">:month</td><td style="text-align:left">建立的月份（2 位数）</td></tr><tr><td style="text-align:center">:i_month</td><td style="text-align:left">建立的月份（去掉开头的零）</td></tr><tr><td style="text-align:center">:day</td><td style="text-align:left">建立的日期（2 位数）</td></tr><tr><td style="text-align:center">:i_day</td><td style="text-align:left">建立的日期（去掉开头的零）</td></tr></tbody></table><h3 id="推送到服务器上"><a href="#推送到服务器上" class="headerlink" title="推送到服务器上"></a>推送到服务器上</h3><pre><code>hexo n #写文章hexo g #生成hexo d #部署 #可与hexo g合并为 hexo d -g</code></pre><h2 id="报错"><a href="#报错" class="headerlink" title="报错"></a>报错</h2><h3 id="1-找不到git部署"><a href="#1-找不到git部署" class="headerlink" title="1.找不到git部署"></a>1.找不到git部署</h3><pre><code>ERROR Deployer not found: git</code></pre><h4 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h4><pre><code>npm install hexo-deployer-git --save</code></pre><h3 id="3-部署类型设置git"><a href="#3-部署类型设置git" class="headerlink" title="3.部署类型设置git"></a>3.部署类型设置git</h3><p>hexo 3.0 部署类型不再是github，_config.yml 中修改</p><pre><code># Deployment## Docs: http://hexo.io/docs/deployment.htmldeploy:  type: git  repository: git@***.github.com:***/***.github.io.git  branch: master</code></pre><h3 id="4-xcodebuild"><a href="#4-xcodebuild" class="headerlink" title="4. xcodebuild"></a>4. xcodebuild</h3><p>xcode-select: error: tool ‘xcodebuild’ requires Xcode, but active developer directory ‘/Library/Developer/CommandLineTools’ is a command line tools instance</p><pre><code>npm install bcrypt</code></pre><h3 id="5-RSS不显示"><a href="#5-RSS不显示" class="headerlink" title="5. RSS不显示"></a>5. RSS不显示</h3><h4 id="安装RSS插件"><a href="#安装RSS插件" class="headerlink" title="安装RSS插件"></a>安装RSS插件</h4><pre><code>npm install hexo-generator-feed --save</code></pre><h4 id="开启RSS功能"><a href="#开启RSS功能" class="headerlink" title="开启RSS功能"></a>开启RSS功能</h4><p>编辑hexo/_config.yml，添加如下代码：</p><pre><code>rss: /atom.xml #rss地址  默认即可</code></pre><h4 id="开启评论"><a href="#开启评论" class="headerlink" title="开启评论"></a>开启评论</h4><ul><li>我使用多说代替自带的评论，在多说 网站注册 &gt; 后台管理 &gt; 添加新站点 &gt; 工具 === 复制通用代码 里面有 short_name</li></ul><ol><li>在根目录 _config.yml 添加一行 disqus_shortname: jslite 是在多说注册时产生的</li><li><p>复制到 themes\landscape\layout_partial\article.ejs<br>把</p><pre><code>        &lt;% if (!index &amp;&amp; post.comments &amp;&amp; config.disqus_shortname){ %&gt;    &lt;section id=&quot;comments&quot;&gt;    &lt;div id=&quot;disqus_thread&quot;&gt;  &lt;noscript&gt;Please enable JavaScript to view the &lt;a href=&quot;//disqus.com/?ref_noscript&quot;&gt;comments powered by Disqus.&lt;/a&gt;&lt;/noscript&gt;&lt;/div&gt;&lt;/section&gt;&lt;% } %&gt;改为&lt;% if (!index &amp;&amp; post.comments &amp;&amp; config.disqus_shortname){ %&gt;  &lt;section id=&quot;comments&quot;&gt;    &lt;!-- 多说评论框 start --&gt;    &lt;div class=&quot;ds-thread&quot; data-thread-key=&quot;&lt;%= post.layout %&gt;-&lt;%= post.slug %&gt;&quot; data-title=&quot;&lt;%= post.title %&gt;&quot; data-url=&quot;&lt;%= page.permalink %&gt;&quot;&gt;&lt;/div&gt;    &lt;!-- 多说评论框 end --&gt;    &lt;!-- 多说公共JS代码 start (一个网页只需插入一次) --&gt;    &lt;script type=&quot;text/javascript&quot;&gt;    var duoshuoQuery = {short_name:&apos;&lt;%= config.disqus_shortname %&gt;&apos;};      (function() {        var ds = document.createElement(&apos;script&apos;);        ds.type = &apos;text/javascript&apos;;ds.async = true;        ds.src = (document.location.protocol == &apos;https:&apos; ? &apos;https:&apos; : &apos;http:&apos;) + &apos;//static.duoshuo.com/embed.js&apos;;        ds.charset = &apos;UTF-8&apos;;        (document.getElementsByTagName(&apos;head&apos;)[0]          || document.getElementsByTagName(&apos;body&apos;)[0]).appendChild(ds);      })();      &lt;/script&gt;    &lt;!-- 多说公共JS代码 end --&gt;  &lt;/section&gt;&lt;% } %&gt;</code></pre></li></ol><p><a href="https://segmentfault.com/a/1190000002632530" target="_blank" rel="external">转自</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;hexo&quot;&gt;&lt;a href=&quot;#hexo&quot; class=&quot;headerlink&quot; title=&quot;hexo&quot;&gt;&lt;/a&gt;hexo&lt;/h2&gt;&lt;pre&gt;&lt;code&gt;npm install hexo -g #安装  
+npm update hexo -g #升级  
+hex
+      
+    
+    </summary>
+    
+    
+      <category term="hexo" scheme="http://fishzone.cn/tags/hexo/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Base64编码</title>
+    <link href="http://fishzone.cn/2017/10/12/Base64%E7%BC%96%E7%A0%81/"/>
+    <id>http://fishzone.cn/2017/10/12/Base64编码/</id>
+    <published>2017-10-12T01:37:22.000Z</published>
+    <updated>2017-10-12T06:31:12.000Z</updated>
+    
+    <content type="html"><![CDATA[<p><a href="https://zh.wikipedia.org/wiki/Base64" target="_blank" rel="external">维基百科</a><br>Base64是一种基于64个可打印字符来表示二进制数据的表示方法。由于2的6次方等于64，所以每6个比特为一个单元，对应某个可打印字符。三个字节有24个比特，对应于4个Base64单元，即3个字节可表示4个可打印字符。它可用来作为电子邮件的传输编码。在Base64中的可打印字符包括字母A-Z、a-z、数字0-9，这样共有62个字符，此外两个可打印符号在不同的系统中而不同。一些如uuencode的其他编码方法，和之后binhex的版本使用不同的64字符集来代表6个二进制数字，但是它们不叫Base64。</p><h3 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h3><blockquote><p>Base64常用于在通常处理文本数据的场合，表示、传输、存储一些二进制数据。包括MIME的<br>email、在XML中存储复杂数据。</p></blockquote><h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><p>举例来说，一段引用自托马斯·霍布斯《利维坦》的文句：</p><blockquote><p>Man is distinguished, not only by his reason, but by this singular passion from other animals, which is a lust of the mind, that by a perseverance of delight in the continued and indefatigable generation of knowledge, exceeds the short vehemence of any carnal pleasure.</p></blockquote><p>经过base64编码之后变成：</p><blockquote><p>TWFuIGlzIGRpc3Rpbmd1aXNoZWQsIG5vdCBvbmx5IGJ5IGhpcyByZWFzb24sIGJ1dCBieSB0aGlz<br>IHNpbmd1bGFyIHBhc3Npb24gZnJvbSBvdGhlciBhbmltYWxzLCB3aGljaCBpcyBhIGx1c3Qgb2Yg<br>dGhlIG1pbmQsIHRoYXQgYnkgYSBwZXJzZXZlcmFuY2Ugb2YgZGVsaWdodCBpbiB0aGUgY29udGlu<br>dWVkIGFuZCBpbmRlZmF0aWdhYmxlIGdlbmVyYXRpb24gb2Yga25vd2xlZGdlLCBleGNlZWRzIHRo<br>ZSBzaG9ydCB2ZWhlbWVuY2Ugb2YgYW55IGNhcm5hbCBwbGVhc3VyZS4=</p></blockquote><p>如果要编码的字节数不能被3整除，最后会多出1个或2个字节，那么可以使用下面的方法进行处理：先使用0字节值在末尾补足，使其能够被3整除，然后再进行base64的编码。在编码后的base64文本后加上一个或两个’=’号，代表补足的字节数。也就是说，当最后剩余一个八位字节（一个byte）时，最后一个6位的base64字节块有四位是0值，最后附加上两个等号；如果最后剩余两个八位字节（2个byte）时，最后一个6位的base字节块有两位是0值，最后附加一个等号</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;a href=&quot;https://zh.wikipedia.org/wiki/Base64&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;维基百科&lt;/a&gt;&lt;br&gt;Base64是一种基于64个可打印字符来表示二进制数据的表示方法。由于2的6次方等于64，所以
+      
+    
+    </summary>
+    
+    
+      <category term="编码" scheme="http://fishzone.cn/tags/%E7%BC%96%E7%A0%81/"/>
+    
+  </entry>
+  
+</feed>
