@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://fishzone.cn/"/>
-  <updated>2017-10-18T13:18:42.000Z</updated>
+  <updated>2017-10-19T14:45:10.000Z</updated>
   <id>http://fishzone.cn/</id>
   
   <author>
@@ -17,11 +17,34 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Parcel has bean finalizer Exception</title>
+    <link href="http://fishzone.cn/2017/10/19/Parcel-has-bean-finalizer-Exception/"/>
+    <id>http://fishzone.cn/2017/10/19/Parcel-has-bean-finalizer-Exception/</id>
+    <published>2017-10-19T14:43:41.000Z</published>
+    <updated>2017-10-19T14:45:10.000Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="Android-Parcel-has-bean-finalizer-exception"><a href="#Android-Parcel-has-bean-finalizer-exception" class="headerlink" title="[Android] Parcel has bean finalizer exception"></a>[Android] Parcel has bean finalizer exception</h3><p>调用UsageStats时遇到了此异常,下面是异常信息</p><pre><code>10-28 21:09:22.872: E/System(16840): Uncaught exception thrown by finalizer10-28 21:09:22.872: E/System(16840): java.lang.IllegalStateException: Binder has been finalized!10-28 21:09:22.872: E/System(16840): at android.os.BinderProxy.transact(Native Method)10-28 21:09:22.872: E/System(16840): at android.database.BulkCursorProxy.close(BulkCursorNative.java:288)10-28 21:09:22.872: E/System(16840): at android.database.BulkCursorToCursorAdaptor.close(BulkCursorToCursorAdaptor.java:133)10-28 21:09:22.872: E/System(16840): at android.database.CursorWrapper.close(CursorWrapper.java:49)10-28 21:09:22.872: E/System(16840): at android.content.ContentResolver$CursorWrapperInner.close(ContentResolver.java:1591)10-28 21:09:22.872: E/System(16840): at android.content.ContentResolver$CursorWrapperInner.finalize(ContentResolver.java:1604)10-28 21:09:22.872: E/System(16840): at java.lang.Daemons$FinalizerDaemon.doFinalize(Daemons.java:182)10-28 21:09:22.872: E/System(16840): at java.lang.Daemons$FinalizerDaemon.run(Daemons.java:168)  10-28 21:09:22.872: E/System(16840): at     java.lang.Thread.run(Thread.java:856)</code></pre><p>此异常是因为Android在跨进程通信时系统为每个进程在Binder驱动中分配的内存是有限的大概10几兆，当我们短时间进行大量ipc时就会把Binder驱动的内存占满，而我们再进行ipc时就会出现此异常。</p><p>我的错误代码是</p><pre><code>UsageStatsManager statsManager = (UsageStatsManager) ctx.getSystemService(USAGE_STATS_SERVICE);    UsageEvents.Event event = new UsageEvents.Event();    final long stepTimeMS = TimeUnit.HOURS.toMillis(1);    long currBeginTimeMS = finalBeginTimeMS;    long currEndTimeMS = currBeginTimeMS + stepTimeMS;    while(isNeedScan) {        final UsageEvents usageEvents = statsManager.queryEvents(currBeginTimeMS, currEndTimeMS);        while (usageEvents.hasNextEvent()) {            usageEvents.getNextEvent(event);        }    }</code></pre><p> 错误的根本原因是在While循环里做了大量的ipc数据获取耗尽了Binder驱动的内存</p><p> 此问题发生在5.x</p><p> 该问题是由于Binder驱动的代码错误导致的，当需要分配内存的时候无法分配，返回null抛出</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;Android-Parcel-has-bean-finalizer-exception&quot;&gt;&lt;a href=&quot;#Android-Parcel-has-bean-finalizer-exception&quot; class=&quot;headerlink&quot; title=&quot;[Andro
+      
+    
+    </summary>
+    
+    
+      <category term="Android" scheme="http://fishzone.cn/tags/Android/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Android文件路径</title>
     <link href="http://fishzone.cn/2017/10/17/Android%E6%96%87%E4%BB%B6%E8%B7%AF%E5%BE%84/"/>
     <id>http://fishzone.cn/2017/10/17/Android文件路径/</id>
     <published>2017-10-17T01:02:34.000Z</published>
-    <updated>2017-10-18T13:18:42.000Z</updated>
+    <updated>2017-10-19T14:47:13.000Z</updated>
     
     <content type="html"><![CDATA[<h3 id="Android常见文件夹"><a href="#Android常见文件夹" class="headerlink" title="Android常见文件夹"></a>Android常见文件夹</h3><h4 id="外部存储、内部存储"><a href="#外部存储、内部存储" class="headerlink" title="外部存储、内部存储"></a>外部存储、内部存储</h4><h5 id="Internal-storage"><a href="#Internal-storage" class="headerlink" title="Internal storage:"></a>Internal storage:</h5><ul><li>总是可用的，文件默认被当前app访问（非root）。</li><li>当用户卸载app的时候，系统会把internal内该app相关的文件都清除干净。</li><li>存储隐私信息，比如账号信息（非root）</li></ul><h5 id="External-storage"><a href="#External-storage" class="headerlink" title="External storage:"></a>External storage:</h5><ul><li>6.0以上需要获取Storage权限。</li><li>并不总是可用的，因为用户有时会通过USB存储模式挂载外部存储器，当取下挂载的这部分    后，就无法对其进行访问了。</li><li>保存在这里的文件可以被其他程序访问。</li><li>保存用户卸载app后不需要删除或者下次安装可以继续访问的文件</li></ul><h4 id="常见的获取文件路径方法，对应的绝对路径"><a href="#常见的获取文件路径方法，对应的绝对路径" class="headerlink" title="常见的获取文件路径方法，对应的绝对路径"></a>常见的获取文件路径方法，对应的绝对路径</h4><ul><li><p>Internal storage</p><pre><code>1. getCacheDir().getAbsolutePath()：     /data/data/packagename/cache2. getFilesDir().getAbsolutePath()：  /data/data/packagename/files</code></pre></li><li><p>External storage</p><pre><code>1. getExternalCacheDir().getAbsolutePath()：   /storage/emulated/0/Android/data/packagename/cache2. Environment.getExternalStorageDirectory().getAbsolutePath()：   /storage/emulated/03.     Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).getAbsolutePath())：   /storage/emulated/0/DCIM4. getExternalFilesDir(Environment.DIRECTORY_PICTURES).getAbsolutePath：   /storage/emulated/0/Android/data/packagename/files/Pictures</code></pre></li></ul><h3 id="Java获取相对路径"><a href="#Java获取相对路径" class="headerlink" title="Java获取相对路径"></a>Java获取相对路径</h3><pre><code>String path = &quot;/var/data/x/xyz.txt&quot;;String base = &quot;/var/data&quot;;String relative = new File(base).toURI().relativize(new  File(path).toURI()).getPath();// relative == &quot;x/xyz.dat&quot;</code></pre>]]></content>
     
@@ -35,7 +58,7 @@
     </summary>
     
     
-      <category term="Anroid" scheme="http://fishzone.cn/tags/Anroid/"/>
+      <category term="Android" scheme="http://fishzone.cn/tags/Android/"/>
     
   </entry>
   

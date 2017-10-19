@@ -78,7 +78,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Yuming の Cabin" />
+  <meta name="keywords" content="Android," />
 
 
 
@@ -96,13 +96,18 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="Yuming の Cabin">
-<meta property="og:url" content="http://fishzone.cn/index.html">
+<meta name="description" content="[Android] Parcel has bean finalizer exception调用UsageStats时遇到了此异常,下面是异常信息 10-28 21:09:22.872: E/System(16840): Uncaught exception thrown by finalizer 10-28 21:09:22.872: E/System(16840): java.lang.Ille">
+<meta name="keywords" content="Android">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Parcel has bean finalizer Exception">
+<meta property="og:url" content="http://fishzone.cn/2017/10/19/Parcel-has-bean-finalizer-Exception/index.html">
 <meta property="og:site_name" content="Yuming の Cabin">
+<meta property="og:description" content="[Android] Parcel has bean finalizer exception调用UsageStats时遇到了此异常,下面是异常信息 10-28 21:09:22.872: E/System(16840): Uncaught exception thrown by finalizer 10-28 21:09:22.872: E/System(16840): java.lang.Ille">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-10-19T14:45:10.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Yuming の Cabin">
+<meta name="twitter:title" content="Parcel has bean finalizer Exception">
+<meta name="twitter:description" content="[Android] Parcel has bean finalizer exception调用UsageStats时遇到了此异常,下面是异常信息 10-28 21:09:22.872: E/System(16840): Uncaught exception thrown by finalizer 10-28 21:09:22.872: E/System(16840): java.lang.Ille">
 
 
 
@@ -131,13 +136,13 @@
 
 
 
-  <link rel="canonical" href="http://fishzone.cn/"/>
+  <link rel="canonical" href="http://fishzone.cn/2017/10/19/Parcel-has-bean-finalizer-Exception/"/>
 
 
 
 
 
-  <title>Yuming の Cabin</title>
+  <title>Parcel has bean finalizer Exception | Yuming の Cabin</title>
   
 
 
@@ -162,9 +167,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-   page-home 
- ">
+  <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -257,9 +260,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -289,9 +292,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/10/19/Parcel-has-bean-finalizer-Exception/" itemprop="url">Parcel has bean finalizer Exception</a></h1>
+          <h1 class="post-title" itemprop="name headline">Parcel has bean finalizer Exception</h1>
         
 
         <div class="post-meta">
@@ -339,20 +340,38 @@
       
 
       
-        
-          
-          [Android] Parcel has bean finalizer exception调用UsageStats时遇到了此异常,下面是异常信息
-10-28 21:09:22.872: E/System(16840): Uncaught exception thrown by finalizer
-1
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/10/19/Parcel-has-bean-finalizer-Exception/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
+        <h3 id="Android-Parcel-has-bean-finalizer-exception"><a href="#Android-Parcel-has-bean-finalizer-exception" class="headerlink" title="[Android] Parcel has bean finalizer exception"></a>[Android] Parcel has bean finalizer exception</h3><p>调用UsageStats时遇到了此异常,下面是异常信息</p>
+<pre><code>10-28 21:09:22.872: E/System(16840): Uncaught exception thrown by finalizer
+10-28 21:09:22.872: E/System(16840): java.lang.IllegalStateException: Binder has been finalized!
+10-28 21:09:22.872: E/System(16840): at android.os.BinderProxy.transact(Native Method)
+10-28 21:09:22.872: E/System(16840): at android.database.BulkCursorProxy.close(BulkCursorNative.java:288)
+10-28 21:09:22.872: E/System(16840): at android.database.BulkCursorToCursorAdaptor.close(BulkCursorToCursorAdaptor.java:133)
+10-28 21:09:22.872: E/System(16840): at android.database.CursorWrapper.close(CursorWrapper.java:49)
+10-28 21:09:22.872: E/System(16840): at android.content.ContentResolver$CursorWrapperInner.close(ContentResolver.java:1591)
+10-28 21:09:22.872: E/System(16840): at android.content.ContentResolver$CursorWrapperInner.finalize(ContentResolver.java:1604)
+10-28 21:09:22.872: E/System(16840): at java.lang.Daemons$FinalizerDaemon.doFinalize(Daemons.java:182)
+10-28 21:09:22.872: E/System(16840): at java.lang.Daemons$FinalizerDaemon.run(Daemons.java:168)  
+10-28 21:09:22.872: E/System(16840): at     java.lang.Thread.run(Thread.java:856)
+</code></pre><p>此异常是因为Android在跨进程通信时系统为每个进程在Binder驱动中分配的内存是有限的大概10几兆，当我们短时间进行大量ipc时就会把Binder驱动的内存占满，而我们再进行ipc时就会出现此异常。</p>
+<p>我的错误代码是</p>
+<pre><code>UsageStatsManager statsManager = (UsageStatsManager) ctx.getSystemService(USAGE_STATS_SERVICE);
+    UsageEvents.Event event = new UsageEvents.Event();
+
+    final long stepTimeMS = TimeUnit.HOURS.toMillis(1);
+    long currBeginTimeMS = finalBeginTimeMS;
+    long currEndTimeMS = currBeginTimeMS + stepTimeMS;
+
+    while(isNeedScan) {
+        final UsageEvents usageEvents = statsManager.queryEvents(currBeginTimeMS, currEndTimeMS);
+        while (usageEvents.hasNextEvent()) {
+            usageEvents.getNextEvent(event);
+
+        }
+    }
+</code></pre><p> 错误的根本原因是在While循环里做了大量的ipc数据获取耗尽了Binder驱动的内存</p>
+<p> 此问题发生在5.x</p>
+<p> 该问题是由于Binder驱动的代码错误导致的，当需要分配内存的时候无法分配，返回null抛出</p>
+
       
     </div>
     
@@ -367,272 +386,36 @@
 
     <footer class="post-footer">
       
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://fishzone.cn/2017/10/17/Android文件路径/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Blank Yu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/goddess.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yuming の Cabin">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/10/17/Android文件路径/" itemprop="url">Android文件路径</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-17T09:02:34+08:00">
-                2017-10-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
+        <div class="post-tags">
           
-
+            <a href="/tags/Android/" rel="tag"># Android</a>
           
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
         </div>
-      </header>
-    
+      
 
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
+      
       
       
 
       
-        
-          
-          Android常见文件夹外部存储、内部存储Internal storage:
-总是可用的，文件默认被当前app访问（非root）。
-当用户卸载app的时候，系统会把internal内该app相关的文件都清除干净。
-存储隐私信息，比如账号信息（非root）
-
-External storage:
-6.0
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/10/17/Android文件路径/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/10/17/Android文件路径/" rel="next" title="Android文件路径">
+                <i class="fa fa-chevron-left"></i> Android文件路径
+              </a>
+            
           </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
 
-    
+          <span class="post-nav-divider"></span>
 
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://fishzone.cn/2017/10/12/hexo常用命令笔记/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Blank Yu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/goddess.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yuming の Cabin">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/10/12/hexo常用命令笔记/" itemprop="url">hexo常用命令笔记</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
+          <div class="post-nav-prev post-nav-item">
             
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-12T14:48:43+08:00">
-                2017-10-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
+          </div>
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          
-          hexonpm install hexo -g #安装  
-npm update hexo -g #升级  
-hexo init #初始化
-简写hexo n &quot;我的博客&quot; == hexo new &quot;我的博客&quot; #新建文章
-hexo p == hexo publ
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/10/12/hexo常用命令笔记/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -642,134 +425,11 @@ hexo p == hexo publ
   </article>
 
 
-    
-      
 
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://fishzone.cn/2017/10/12/Base64编码/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Blank Yu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/goddess.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yuming の Cabin">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/10/12/Base64编码/" itemprop="url">Base64编码</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-12T09:37:22+08:00">
-                2017-10-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          维基百科Base64是一种基于64个可打印字符来表示二进制数据的表示方法。由于2的6次方等于64，所以每6个比特为一个单元，对应某个可打印字符。三个字节有24个比特，对应于4个Base64单元，即3个字节可表示4个可打印字符。它可用来作为电子邮件的传输编码。在Base64中的可打印字符包括字母A-Z
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/10/12/Base64编码/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
+    <div class="post-spread">
       
     </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
   </div>
-  
-  
-  
-  </article>
-
-
-    
-  </section>
-
-  
 
 
           </div>
@@ -777,6 +437,10 @@ hexo p == hexo publ
 
 
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
         
@@ -797,8 +461,17 @@ hexo p == hexo publ
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/goddess.jpeg"
@@ -871,6 +544,22 @@ hexo p == hexo publ
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Android-Parcel-has-bean-finalizer-exception"><span class="nav-number">1.</span> <span class="nav-text">[Android] Parcel has bean finalizer exception</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -993,10 +682,10 @@ hexo p == hexo publ
 
 
   
-    <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
 <script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
 
-  
+
 
   
 
