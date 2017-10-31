@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://fishzone.cn/"/>
-  <updated>2017-10-19T14:45:10.000Z</updated>
+  <updated>2017-10-31T13:53:55.000Z</updated>
   <id>http://fishzone.cn/</id>
   
   <author>
@@ -15,6 +15,36 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>提升认知的方法</title>
+    <link href="http://fishzone.cn/2017/10/31/%E6%8F%90%E9%AB%98%E8%AE%A4%E7%9F%A5%E7%9A%84%E6%96%B9%E6%B3%95/"/>
+    <id>http://fishzone.cn/2017/10/31/提高认知的方法/</id>
+    <published>2017-10-31T13:42:51.000Z</published>
+    <updated>2017-10-31T13:53:55.000Z</updated>
+    
+    <content type="html"><![CDATA[<ol><li>指定清晰目标</li><li>不要活在过去</li><li>简历完整的认知框架 </li><li>学会逆向思考</li><li>深入分析对手，还有竞品</li><li>深度思考</li><li>人丑就要多读书</li><li>刻意练习</li><li>常反思</li><li>拒绝犯懒</li><li>学会与他人合作</li><li>简化目标</li><li>善于倾听各种反馈</li><li>记录思路</li><li>聚焦要点</li><li>接纳自己</li><li>多做几个好项目</li><li>改变别人之前，先改变自己</li><li>一切不以用户至上的行为都是耍流氓</li><li>简单做人、简单做事</li><li>成功的关键不是智商，而是毅力</li><li>提升格局</li><li>制定持续推进的路线图</li><li>紧跟热点</li><li>没有偶然、只有必然</li><li>做事以终为始</li><li>冲破自己的舒适区</li><li>尝试失败也不错</li><li>保持好奇心</li><li>具体可行的方法论</li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;ol&gt;
+&lt;li&gt;指定清晰目标&lt;/li&gt;
+&lt;li&gt;不要活在过去&lt;/li&gt;
+&lt;li&gt;简历完整的认知框架 &lt;/li&gt;
+&lt;li&gt;学会逆向思考&lt;/li&gt;
+&lt;li&gt;深入分析对手，还有竞品&lt;/li&gt;
+&lt;li&gt;深度思考&lt;/li&gt;
+&lt;li&gt;人丑就要多读书&lt;/li&gt;
+&lt;li&gt;刻意练习&lt;/li&gt;
+&lt;
+      
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>Parcel has bean finalizer Exception</title>
