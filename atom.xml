@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://fishzone.cn/"/>
-  <updated>2017-10-31T13:53:55.000Z</updated>
+  <updated>2017-10-31T14:00:01.000Z</updated>
   <id>http://fishzone.cn/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>开发过程中要重视函数细节，知其所以然</title>
+    <link href="http://fishzone.cn/2017/10/31/%E5%BC%80%E5%8F%91%E8%BF%87%E7%A8%8B%E4%B8%AD%E8%A6%81%E9%87%8D%E8%A7%86%E5%87%BD%E6%95%B0%E7%BB%86%E8%8A%82%EF%BC%8C%E7%9F%A5%E5%85%B6%E6%89%80%E4%BB%A5%E7%84%B6/"/>
+    <id>http://fishzone.cn/2017/10/31/开发过程中要重视函数细节，知其所以然/</id>
+    <published>2017-10-31T13:58:28.000Z</published>
+    <updated>2017-10-31T14:00:01.000Z</updated>
+    
+    <content type="html"><![CDATA[<ol><li>开发中使用的技术要有详细的理解</li><li>使用的新技术要有充分的调研</li><li>有限的时间里最优解决任务</li><li>良好的代码设计才能在有限的时间里完成任务</li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;ol&gt;
+&lt;li&gt;开发中使用的技术要有详细的理解&lt;/li&gt;
+&lt;li&gt;使用的新技术要有充分的调研&lt;/li&gt;
+&lt;li&gt;有限的时间里最优解决任务&lt;/li&gt;
+&lt;li&gt;良好的代码设计才能在有限的时间里完成任务&lt;/li&gt;
+&lt;/ol&gt;
+
+      
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>提升认知的方法</title>
